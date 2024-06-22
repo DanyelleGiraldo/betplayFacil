@@ -11,7 +11,7 @@ public class viewCoach {
        public void start() {
        Scanner sc = new Scanner(System.in);
        while(true){
-              System.out.println("1. Crear entrenado");
+              System.out.println("1. Crear entrenador");
               System.out.println("2. Actualizar entrenador");
               System.out.println("3. Buscar entrenador");
               System.out.println("4. Eliminar entrenador");
@@ -81,6 +81,7 @@ public class viewCoach {
                      case 3:
                             System.out.println("Ingrese el id del entrenador: ");
                             int entrenadorcodigo = sc.nextInt();
+                            sc.nextLine();
 
                             if (controlador.entrenadores.contains(entrenadorcodigo)) {
                                 System.out.println("Nombre de mi entrenador: " + entrenador.getNombre());                                
@@ -92,7 +93,7 @@ public class viewCoach {
                      case 4:
                         System.out.println("Ingrese el id del entrenador a eliminar: ");
                         int entrenadoreliminar = sc.nextInt();
-                        sc.nextLine(); // Consumir el salto de línea
+                        sc.nextLine(); 
 
                         String claveEntrenadorEliminar = Integer.toString(entrenadoreliminar);
 
