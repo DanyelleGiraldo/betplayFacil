@@ -25,34 +25,33 @@ public class viewCoach {
                             System.out.println("Ingrese el id del entrenador: ");
                             int idcoach = sc.nextInt();
                             sc.nextLine();
-                            entrenador.setId(idcoach);
 
                             System.out.println("Ingrese el nombre del entrenador:");
                             String nombrentrenador = sc.nextLine();
-                            entrenador.setNombre(nombrentrenador);
 
                             System.out.println("Ingrese el apellido del coach: ");
                             String apellidoentrenenador = sc.nextLine();
-                            entrenador.setApellido(apellidoentrenenador);
 
                             System.out.println("Ingrese la edad del entrenador: ");
                             int edadentrenador = sc.nextInt();
                             sc.nextLine();
-                            entrenador.setEdad(edadentrenador);
 
                             System.out.println("Ingrese la id de la federacion: ");
                             int idfederacion= sc.nextInt();
                             sc.nextLine();
-                            entrenador.setIdFederacion(idfederacion);
-
+                            
+                            Coach nuevoCoach = new Coach(idcoach, nombrentrenador, apellidoentrenenador, edadentrenador, idfederacion);
+                            controlador.entrenadores.put(idcoach, nuevoCoach);
                      break;
 
                      case 2:
                             System.out.println("Ingrese el id del coach a actualizar: ");
                             int codigoentrenador= sc.nextInt();
+                            sc.nextLine();
 
                             if (controlador.entrenadores.containsKey(codigoentrenador)) {
                                 Coach entrenadoract = controlador.entrenadores.get(codigoentrenador);
+
                                 System.out.println("Ingrese el nombre de el entrenador: ");
                                 String nuevonombre= sc.nextLine();
                                 entrenadoract.setNombre(nuevonombre);
@@ -79,14 +78,23 @@ public class viewCoach {
                      break;
 
                      case 3:
-                            System.out.println("Ingrese el id del entrenador: ");
-                            int entrenadorcodigo = sc.nextInt();
-                            sc.nextLine();
+                            Coach ch= new Coach();
+                            boolean encontrado = false;
 
-                            if (controlador.entrenadores.contains(entrenadorcodigo)) {
-                                System.out.println("Nombre de mi entrenador: " + entrenador.getNombre());                                
-                            } else {
-                                System.out.println("El entrenador con el id: "+ entrenadorcodigo + " no existe");
+                            while (!encontrado) { 
+                                System.out.println("Ingrese el id del coach: ");
+                                int codigoc = sc.nextInt();
+                                sc.nextLine();
+
+                                if(controlador.entrenadores.containsKey(codigoc)){
+                                    ch = controlador.entrenadores.get(codigoc);
+                                    System.out.println("Nombre del coach es: "+ ch.getNombre());
+                                    encontrado = true;
+                                    break;
+                                }
+                                if(!encontrado){
+                                    System.out.println("El entrenado con el id: "+ codigoc + " no existe.");
+                                }
                             }
                             
                      break;
@@ -95,10 +103,8 @@ public class viewCoach {
                         int entrenadoreliminar = sc.nextInt();
                         sc.nextLine(); 
 
-                        String claveEntrenadorEliminar = Integer.toString(entrenadoreliminar);
-
-                        if (controlador.entrenadores.containsKey(claveEntrenadorEliminar)) {
-                            controlador.entrenadores.remove(claveEntrenadorEliminar);
+                        if (controlador.entrenadores.containsKey(entrenadoreliminar)) {
+                            controlador.entrenadores.remove(entrenadoreliminar);
                             System.out.println("El entrenador con el id " + entrenadoreliminar + " ha sido eliminado.");
                         } else {
                             System.out.println("El entrenador con el id " + entrenadoreliminar + " no existe.");
@@ -108,7 +114,7 @@ public class viewCoach {
 
                      case 5:
                             System.out.println("Listado de todos los entrenadores:");
-                            for (String key : controlador.entrenadores.keySet()) {
+                            for (int key : controlador.entrenadores.keySet()) {
                                 Coach coach = controlador.entrenadores.get(key);
                                 System.out.println("ID: " + coach.getId());
                                 System.out.println("Nombre: " + coach.getNombre());

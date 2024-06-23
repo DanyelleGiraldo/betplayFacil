@@ -1,13 +1,16 @@
 package com.soccer.view;
 
-import com.soccer.Controller;
-import com.soccer.model.entity.Player;
 import java.util.Scanner;
 
+import com.soccer.Controller;
+import com.soccer.model.entity.Player;
+
 public class viewPlayer {
-       public static Controller controlador;
+       public static Controller controlador = new Controller();
        public void start() {
+
        Scanner sc = new Scanner(System.in);
+
        while(true){
               System.out.println("1. Crear Jugador");
               System.out.println("2. Actualizar Jugador");
@@ -15,38 +18,38 @@ public class viewPlayer {
               System.out.println("4. Eliminar Jugador");
               System.out.println("5. Listar todos Jugador");
               System.out.println("6. Salir");
+
               int choice = sc.nextInt();
               sc.nextLine();
+
               Player jugador = new Player();
+
               switch (choice) {
                      case 1:
 
                             System.out.println("Ingrese el id del jugador");
                             int idjugador = sc.nextInt();
-                            jugador.setId(idjugador);
                             sc.nextLine();
-
+                     
                             System.out.println("Ingrese el nombre del jugador");
                             String nombrejugador = sc.nextLine();
-                            jugador.setNombre(nombrejugador);
-
+                     
                             System.out.println("Ingrese el apellido del jugador");
                             String apellidojugador = sc.nextLine();
-                            jugador.setApellido(apellidojugador);
-
+                     
                             System.out.println("Ingrese la edad del jugador");
                             int edadjugador = sc.nextInt();
-                            jugador.setEdad(edadjugador);
                             sc.nextLine();
-
+                     
                             System.out.println("Ingrese el dorsal del jugador");
                             int dorsaljugador = sc.nextInt();
-                            jugador.setDorsal(dorsaljugador);
                             sc.nextLine();
-
+                     
                             System.out.println("Ingrese la posicion del jugador");
                             String posicionjugador = sc.nextLine();
-                            jugador.setPosicion(posicionjugador);
+                     
+                            Player nuevoJugador = new Player(idjugador, nombrejugador, apellidojugador, edadjugador, dorsaljugador, posicionjugador);
+                            controlador.jugadores.put(idjugador, nuevoJugador);
 
                      break;
 
@@ -56,7 +59,7 @@ public class viewPlayer {
                             int codigojugador = sc.nextInt();
                             sc.nextLine();
 
-                            if(controlador.jugadores.contains(codigojugador)){
+                            if(controlador.jugadores.containsKey(codigojugador)){
                                    Player jugadoract = controlador.jugadores.get(codigojugador);
 
                                    System.out.println("Ingrese el nombre del jugador");
@@ -87,37 +90,32 @@ public class viewPlayer {
                      break;
 
                      case 3:
+                            Player pl = new Player();
                             boolean encontrado = false;
-                            Scanner sca = new Scanner(System.in);
                             
-                            while (!encontrado) {
-                            System.out.println("Ingrese el ID del jugador (o 'salir' para salir):");
-                            String codigoJug = sca.nextLine();
-                            
-                            if (codigoJug.equalsIgnoreCase("salir")) {
-                                   System.out.println("Saliendo del programa...");
-                                   break; 
-                            }
-                            
-                                   if (controlador.equipos.contains(codigoJug)) {
-                                   System.out.println("Nombre de mi jugador: " + jugador.getNombre());
-                                   encontrado = true; 
-                                   break; 
+                            while(!encontrado){
+                                   System.out.println("Ingrese el id del jugador o ");
+                                   int codigop=sc.nextInt();
+                                   sc.nextLine();
+
+                                   if(controlador.jugadores.containsKey(codigop)){
+                                          pl = controlador.jugadores.get(codigop);
+                                          System.out.println("Nombre del jugador es: "+ pl.getNombre());
+                                          encontrado = true;
+                                          break;
                                    }
-                            
-                            if (!encontrado) {
-                                   System.out.println("El jugador con el ID '" + codigoJug + "' no existe.");
+                                   if(!encontrado){
+                                          System.out.println("El jugador con el id: "+ codigop + " no existe");
+                                   }
                             }
-                            }
-                            
-                            sc.close();       
                             
                      break;
                      case 4:
                             System.out.println("Ingrese el id del jugador a eliminar: ");
-                            String jugadoraeliminar = sc.nextLine();
+                            int jugadoraeliminar = sc.nextInt();
+                            sc.nextLine();
 
-                            if(controlador.jugadores.contains(jugadoraeliminar)){
+                            if(controlador.jugadores.containsKey(jugadoraeliminar)){
                                    controlador.jugadores.remove(jugadoraeliminar);
                                    System.out.println("el jugador con el id: "+ jugadoraeliminar+ " ha sido eliminado");
                             }else{
@@ -127,15 +125,15 @@ public class viewPlayer {
 
                      case 5:
                             System.out.println("Listado de todos los jugadores: ");
-                            for(String key : controlador.jugadores.keySet()){
-                                   jugador = controlador.jugadores.get(key);
-                                   System.out.println("Codigo: "+ key);
-                                   System.out.println("Nombre: "+ jugador.getNombre());
-                                   System.out.println("Apellido: "+ jugador.getApellido());
-                                   System.out.println("Edad: "+ jugador.getEdad());
-                                   System.out.println("Dorsal: "+ jugador.getDorsal());
-                                   System.out.println("pocision; "+jugador.getPosicion());
-                                   System.out.println("-----------------------------------");
+                            for (Integer key : controlador.jugadores.keySet()) {
+                            Player currentPlayer = controlador.jugadores.get(key);
+                            System.out.println("Codigo: " + key);
+                            System.out.println("Nombre: " + currentPlayer.getNombre());
+                            System.out.println("Apellido: " + currentPlayer.getApellido());
+                            System.out.println("Edad: " + currentPlayer.getEdad());
+                            System.out.println("Dorsal: " + currentPlayer.getDorsal());
+                            System.out.println("Posicion: " + currentPlayer.getPosicion());
+                            System.out.println("-----------------------------------");
                             }
                      break;
 

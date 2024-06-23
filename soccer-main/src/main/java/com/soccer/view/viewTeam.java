@@ -1,8 +1,7 @@
 package com.soccer.view;
 
-import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 
 import com.soccer.Controller;
 import com.soccer.model.entity.Coach;
@@ -179,10 +178,10 @@ public class viewTeam {
                     Scanner sca = new Scanner(System.in);
                     
                     while (!encontrado) {
-                        System.out.println("Ingrese el ID del equipo (o '2' para salir):");
+                        System.out.println("Ingrese el ID del equipo (o 'salir' para salir):");
                         String codigoE = sca.nextLine();
                         
-                        if (codigoE.equalsIgnoreCase("2")) {
+                        if (codigoE.equalsIgnoreCase("salir")) {
                             System.out.println("Saliendo del programa...");
                             break; 
                         }
