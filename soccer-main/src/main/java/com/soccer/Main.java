@@ -27,39 +27,44 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         
         System.out.println("Menu de gestion de la liga betplay");
-        int opcion = 0;
-
+        
         while (true) {
-            System.out.println("Opciones: \n 1: Equipos \n 2: Jugadores \n 3: Medicos \n 4: Instructores");
-            try {
-                opcion = sc.nextInt();
-                sc.nextLine(); 
-                if (opcion >= 1 && opcion <= 4) {
-                    break; 
-                } else {
-                    System.out.println("Opción no válida. Por favor, elija una opción entre 1 y 4.");
+            int opcion = 0;
+            while (true) {
+                System.out.println("Opciones: \n 1: Equipos \n 2: Jugadores \n 3: Medicos \n 4: Instructores \n 5: Salir");
+                try {
+                    opcion = sc.nextInt();
+                    sc.nextLine();
+                    if (opcion >= 1 && opcion <= 5) {
+                        break; 
+                    } else {
+                        System.out.println("Opción no válida. Por favor, elija una opción entre 1 y 5.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada no válida. Por favor, ingrese un número.");
+                    sc.nextLine();
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Entrada no válida. Por favor, ingrese un número.");
-                sc.nextLine(); 
+            }
+
+            switch (opcion) {
+                case 1:
+                    vt.start();
+                    break;
+                case 2:
+                    vp.start();
+                    break;
+                case 3:
+                    vd.start();
+                    break;
+                case 4:
+                    vc.start();
+                    break;
+                case 5:
+                    System.out.println("Saliendo del sistema...");
+                    sc.close();
+                    System.exit(0);
+                    break;
             }
         }
-
-        switch (opcion) {
-            case 1:
-                vt.start();
-                break;
-            case 2:
-                vp.start();
-                break;
-            case 3:
-                vd.start();
-                break;
-            case 4:
-                vc.start();
-                break;
-        }
-
-        sc.close(); 
     }
 }

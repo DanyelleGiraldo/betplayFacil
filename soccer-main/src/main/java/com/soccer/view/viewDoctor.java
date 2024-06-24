@@ -24,28 +24,26 @@ public class viewDoctor {
                             System.out.println("Ingrese el id del medico:");
                             int idmedico = sc.nextInt();
                             sc.nextLine();
-                            doctor.setId(idmedico);
 
                             System.out.println("Ingrese el nombre del medico:");
                             String nombremedico = sc.nextLine();
-                            doctor.setNombre(nombremedico);
 
                             System.out.println("Ingrese el apellido del medico:");
                             String apellidomedico = sc.nextLine();
-                            doctor.setApellido(apellidomedico);
 
                             System.out.println("Ingrese la edad del medico:");
                             int edadmedico= sc.nextInt();
                             sc.nextLine();
-                            doctor.setEdad(edadmedico);
                             
                             System.out.println("Ingrese el titulo del medico: ");
                             String titulomedico = sc.nextLine();
-                            doctor.setTitulo(titulomedico);
 
                             System.out.println("Ingrese los años de experiencia");
                             int expyear = sc.nextInt();
-                            doctor.setExpYear(expyear);
+                            sc.nextLine();
+
+                            Doctor nuevodoctor = new Doctor(idmedico, nombremedico, apellidomedico, edadmedico, titulomedico, expyear);
+                            controlador.doctores.put(idmedico, nuevodoctor);
                      break;
 
                      case 2:
@@ -53,7 +51,7 @@ public class viewDoctor {
                             int codigomedico = sc.nextInt();
                             sc.nextLine();
 
-                            if(controlador.doctores.contains(codigomedico)){
+                            if(controlador.doctores.containsKey(codigomedico)){
                                    Doctor doctoract = controlador.doctores.get(codigomedico);
 
                                    System.out.println("Ingrese el nombre del medico: ");
@@ -83,14 +81,23 @@ public class viewDoctor {
                      break;
 
                      case 3:
-                            System.out.println("Ingrese el id del medico: ");
-                            int medicoid = sc.nextInt();
-                            sc.nextLine();
+                            Doctor dc = new Doctor();
+                            boolean encontrado = false;
 
-                            if (controlador.doctores.contains(medicoid)) {
-                                   System.out.println("Nombre del medico: "+ doctor.getNombre());
-                            } else {
-                                   System.out.println("El medico con el id: "+ medicoid + " no existe");
+                            while(!encontrado){
+                                   System.out.println("Ingrese el id del medico");
+                                   int codigod = sc.nextInt();
+                                   sc.nextLine();
+
+                                   if(controlador.doctores.containsKey(codigod)){
+                                          dc = controlador.doctores.get(codigod);
+                                          System.out.println("Nombre del medigo es: "+ dc.getNombre());
+                                          encontrado = true;
+                                          break;
+                                   }
+                                   if(!encontrado){
+                                          System.out.println("El medico con el id: "+codigod+ " no existe");
+                                   }
                             }
                      break;
                      case 4:
@@ -109,7 +116,7 @@ public class viewDoctor {
 
                      case 5:
                             System.out.println("Listado de todos los entrenadores:");
-                            for(String key : controlador.doctores.keySet()){
+                            for(Integer key : controlador.doctores.keySet()){
                                    Doctor doctors = controlador.doctores.get(key);
                                    System.out.println("Id: "+ doctors.getId());
                                    System.out.println("Nombre: "+ doctors.getNombre());
@@ -121,8 +128,7 @@ public class viewDoctor {
                      break;
 
                      case 6:
-                     sc.close();
-                     System.exit(0);
+                     return;
                      default:
                      System.out.println("Opcion invalida, intentelo de nuevo.");
                      }

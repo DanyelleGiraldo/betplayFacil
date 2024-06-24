@@ -138,8 +138,7 @@ public class viewPlayer {
                      break;
 
                      case 6:
-                     sc.close();
-                     System.exit(0);
+                     return;
                      default:
                      System.out.println("Opcion invalida, intentelo de nuevo.");
                      }

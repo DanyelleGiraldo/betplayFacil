@@ -239,9 +239,7 @@ public class viewTeam {
             
 
         case 6:
-                sc.close();
-                System.exit(0);
-        break;
+                return;
             default:
             System.out.println("Opción inválida, intentelo de nuevo.");
                 
