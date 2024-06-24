@@ -44,30 +44,39 @@ public class viewTeam {
                     equipo.setCiudad(sc.nextLine());
 
                     do {
-                            System.out.println("Ingrese el ID del jugador:");
-                            int idjugador = sc.nextInt();
-                            Player jugador = new Player();
-                            jugador.setId(idjugador);  
-                            jugadoresz.add(jugador);
+                        System.out.println("Ingrese el ID del jugador:");
+                        int idjugador = sc.nextInt();
+                        sc.nextLine();
+                        Player jugadors = new Player();
                         
-                            System.out.println("¿Quiere agregar otro jugador? \n 1: Sí \n 2: No");
-                            int opcion = sc.nextInt();
-                            sc.nextLine(); 
-                            if (opcion == 2) {
-                                break;
-                            }
-                            sc.nextLine();
-                    } while (true);
-                        equipo.setLstJugadores(jugadoresz);
 
-                    equipo.setLstJugadores(jugadores); 
+                        if (controlador.jugadores.containsKey(idjugador)) {
+                            jugadors= controlador.jugadores.get(idjugador);
+                            jugadoresz.add(jugadors);
+                        } else {
+                            System.out.println("El jugador que quieres agregar no existe.");
+                        }
+                        
+                        System.out.println("¿Quiere agregar otro jugador? \n 1: Sí \n 2: No");
+                        int opcion = sc.nextInt();
+                        sc.nextLine(); 
+                        if (opcion == 2) {
+                            break;
+                        }
+                    } while (true);
+                    equipo.setLstJugadores(jugadoresz); 
 
                     do {
                         System.out.println("Ingrese el ID del instructor:");
                         int idinstructor = sc.nextInt();
                         Coach instructor = new Coach();
-                        instructor.setId(idinstructor);
-                        instructores.add(instructor);
+
+                        if (controlador.entrenadores.containsKey(idinstructor)) {
+                            instructor = controlador.entrenadores.get(idinstructor);
+                            instructores.add(instructor);
+                        } else {
+                            System.out.println("El entrenador no existe");
+                        }                        
 
                         System.out.println("¿Quiere agregar otro instructor? \n 1: Sí \n 2: No");
                         int opcion = sc.nextInt();
@@ -83,9 +92,14 @@ public class viewTeam {
                         System.out.println("Ingrese el ID del medico:");
                         int idmedico = sc.nextInt();
                         Doctor medico = new Doctor();
-                        medico.setId(idmedico);
-                        doctores.add(medico);
 
+                        if (controlador.doctores.containsKey(idmedico)) {
+                            medico = controlador.doctores.get(idmedico);
+                            doctores.add(medico);
+                        }else {
+                            System.out.println("El medico no existe");
+                        }
+                        
                         System.out.println("¿Quiere agregar otro medico? \n 1: Sí \n 2: No");
                         int opcion = sc.nextInt();
                         if (opcion == 2) {
@@ -117,10 +131,16 @@ public class viewTeam {
                         do {
                             System.out.println("Ingrese el ID del jugador:");
                             int idjugador = sc.nextInt();
-                            Player jugador = new Player();
-                            jugador.setId(idjugador);  
-                            jugadoresz.add(jugador);
-                        
+                            sc.nextLine();
+                            Player jugadors = new Player();
+                            
+                            if (controlador.jugadores.containsKey(idjugador)) {
+                                jugadors= controlador.jugadores.get(idjugador);
+                                jugadoresz.add(jugadors);
+                            } else {
+                                System.out.println("El jugador que quieres agregar no existe.");
+                            }
+                            
                             System.out.println("¿Quiere agregar otro jugador? \n 1: Sí \n 2: No");
                             int opcion = sc.nextInt();
                             sc.nextLine(); 
@@ -132,35 +152,45 @@ public class viewTeam {
                 
                     ArrayList<Coach> entrenadores = new ArrayList<>();
                     do {
-                            System.out.println("Ingrese el ID del entrenador:");
-                            int idEntrenador = sc.nextInt();
-                            Coach entrenador = new Coach(); 
-                            entrenador.setId(idEntrenador);
-                            entrenadores.add(entrenador);
-                
-                            System.out.println("¿Quiere agregar otro entrenador? \n 1: Sí \n 2: No");
-                            int opcion = sc.nextInt();
-                            sc.nextLine();
-                            if (opcion == 2) {
-                                break;
-                            }
+                        System.out.println("Ingrese el ID del instructor:");
+                        int idinstructor = sc.nextInt();
+                        Coach instructor = new Coach();
+
+                        if (controlador.entrenadores.containsKey(idinstructor)) {
+                            instructor = controlador.entrenadores.get(idinstructor);
+                            entrenadores.add(instructor);
+                        } else {
+                            System.out.println("El entrenador no existe");
+                        }                        
+
+                        System.out.println("¿Quiere agregar otro instructor? \n 1: Sí \n 2: No");
+                        int opcion = sc.nextInt();
+                        if (opcion == 2) {
+                            break;
+                        }
+                        sc.nextLine();
                     } while (true);
                     equipoact.setLstEntrenadores(entrenadores);
                 
                     ArrayList<Doctor> medicos = new ArrayList<>();
                     do {
-                            System.out.println("Ingrese el ID del médico:");
-                            int idMedico = sc.nextInt();
-                            Doctor medico = new Doctor(); 
-                            medico.setId(idMedico);
+                        System.out.println("Ingrese el ID del medico:");
+                        int idmedico = sc.nextInt();
+                        Doctor medico = new Doctor();
+
+                        if (controlador.doctores.containsKey(idmedico)) {
+                            medico = controlador.doctores.get(idmedico);
                             medicos.add(medico);
-                
-                            System.out.println("¿Quiere agregar otro médico? \n 1: Sí \n 2: No");
-                            int opcion = sc.nextInt();
-                            sc.nextLine(); 
-                            if (opcion == 2) {
-                                break;
-                            }
+                        }else {
+                            System.out.println("El medico no existe");
+                        }
+                        
+                        System.out.println("¿Quiere agregar otro medico? \n 1: Sí \n 2: No");
+                        int opcion = sc.nextInt();
+                        if (opcion == 2) {
+                            break;
+                        }
+                        sc.nextLine();
                     } while (true);
                     equipoact.setLstMasajistas(medicos);
                 
